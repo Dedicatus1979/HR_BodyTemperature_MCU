@@ -15,7 +15,7 @@ A simple heart rate and temperature monitoring device based on micropython.
 |MAX30205|体温监测装置|
 |HS96L03|0.96英寸OLED显示屏|
 
-其中，所有设备均建议使用已经集成好必要元器件的**模块**或**开发板**使用。+
+其中，所有设备均建议使用已经集成好必要元器件的**模块**或**开发板**使用。
 
 ![图1](./imgs/img1.png)
 
@@ -43,6 +43,8 @@ A simple heart rate and temperature monitoring device based on micropython.
 ```codes/main.py```文件为主程序，设备运行的主要逻辑与一些心率处理算法写在该文件内
 
 ```codes/red.bin```文件为以二进制格式保存下来的最后一次运行的数据。由程序自动生成与更新，其中数据为四位十六进制数所存储的数据，前1500组数据为心率的原始数据（反射光强度的信息），最后一组数据为体温信息，其中体温数据为100倍摄氏度（即小数点后移两位）
+
+文件内最后45组数据如下：
 
 ![图2](./imgs/img2.png)
 
