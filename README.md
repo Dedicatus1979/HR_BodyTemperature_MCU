@@ -19,4 +19,35 @@ A simple heart rate and temperature monitoring device based on micropython.
 
 ![图1](./imgs/img1.png)
 
+其中STM32所使用的MicroPython固件为微行科技的[STM32F4x1 MiniF4](https://github.com/WeActStudio/WeActStudio.MiniSTM32F4x1)
 
+## 大致引脚定义
+|单片机接口|接至|
+|---|---|
+|PB10、PB3|OLED屏的IIC口|
+|PB6、PB7|MAX30102与MAX30205的IIC口|
+|PB0|自定义复位口|
+
+## 大致实现原理
+单片机读取心率传感器中的光强度反射数据（等价于脉搏波信息），主要通过极值算法计算出一段时间内的心跳次数，从而计算出每分钟的心跳数。体温则通过读取体温传感器中的数据计算得出。
+
+## 包内程序大致讲解
+```codes```文件夹内的文件即为该设备的所有程序。
+
+```codes/max30102```文件夹内为MAX30102的驱动程序，该文件为本人在[STM32F4x1 MiniF4](https://github.com/kandizzy/esp32-micropython/blob/master/PPG/ppg/MAX30105.py)的基础上进行精简而成
+
+```codes/ssd1306py```文件夹内为0.96英寸OLED显示屏的驱动程序，该程序为本人在[jdh99](https://blog.csdn.net/jdh99)的驱动程序上魔改而成
+
+```codes/some_other.py```文件为本人自己写的一些驱动程序
+
+```codes/main.py```文件为主程序，设备运行的主要逻辑与一些心率处理算法写在该文件内
+
+```codes/red.bin```文件为以二进制格式保存下来的最后一次运行的数据。由程序自动生成与更新，其中数据为四位十六进制数所存储的数据，前1500组数据为心率的原始数据（反射光强度的信息），最后一组数据为体温信息，其中体温数据为100倍摄氏度（即小数点后移两位）
+
+![图2](./imgs/img2.png)
+
+该文件内的数据可处理为脉搏波图像，如下：
+
+![图3](./imgs/img3.png)
+
+***
