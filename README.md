@@ -50,4 +50,9 @@ A simple heart rate and temperature monitoring device based on micropython.
 
 ![图3](./imgs/img3.png)
 
+## 结果展示
+在正确配置与使用的情况下，其输出结果如下图：
+
+![图4](./imgs/img4.png)
+
 ***
